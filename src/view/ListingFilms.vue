@@ -19,18 +19,18 @@
   </template>
   
   <script setup>
-  import Film from '@/class/Film';
-  import Realisateur from '@/class/Realisateur';
-  
-  const ajouterFilm = () => {
-      const realisateur1 = new Realisateur("Sameul", "test", "française", "20/07/1996");
-      const film = new Film("Titre", "Annee de sortie", "Langue", realisateur1, "Genre");
-      const films = JSON.parse(localStorage.getItem('films')) || [];
-      films.push(film);
-      localStorage.setItem('films', JSON.stringify(films));
-  }
-  
-  const films = JSON.parse(localStorage.getItem('films')) || [];
+    import Film from '@/class/Film';
+    import Realisateur from '@/class/Realisateur';
+    
+    const ajouterFilm = () => {
+        const realisateur1 = new Realisateur("Sameul", "test", "française", "20/07/1996");
+        const film = new Film("Titre", "Annee de sortie", "Langue", realisateur1, "Genre");
+        const films = JSON.parse(localStorage.getItem('films')) || [];
+        films.push(film);
+        localStorage.setItem('films', JSON.stringify(films));
+    }
+    
+    const films = JSON.parse(localStorage.getItem('films')) || [];
   </script>
   
   <style>
