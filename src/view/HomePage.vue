@@ -1,8 +1,8 @@
 <template>
-  <RouterView/>
+    <p>HomePage</p>
 </template>
 
-<script>
+<script setup>
 
 </script>
 

@@ -1,8 +1,8 @@
 <template>
-  <RouterView/>
+    <p>Listing</p>
 </template>
 
-<script>
+<script setup>
 
 </script>
 
