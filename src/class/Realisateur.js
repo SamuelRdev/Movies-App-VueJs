@@ -1,7 +1,7 @@
-let idCounter = 0;
+import { v4 as uuidv4 } from 'uuid';
 export default class Realisateur {
     constructor(nom, prenom, nationalite, date_naissance) {
-      this._id = ++idCounter;
+      this._id = uuidv4();
       this._nom = nom;
       this._prenom = prenom;
       this._nationalite = nationalite;

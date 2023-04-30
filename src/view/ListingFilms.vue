@@ -2,8 +2,8 @@
 
     <div class="row">
         <div>
-            <button @click="ajouterFilm">Ajouter un film</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Ajouter un film</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRealisateur" data-bs-whatever="@mdo">Ajouter un réalisateur</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie" data-bs-whatever="@mdo">Ajouter un film</button>
         </div>
     </div>
 
@@ -12,25 +12,40 @@
             <MovieCard :film="film"/>
         </div>
     </div>
-
-    <ModalForm/>
-    
+    <div class="modal fade" id="addMovie" tabindex="-1" aria-labelledby="addMovieLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addMovieLabel">Ajouter un film</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ModalForm :realisateurs="realisateurs"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addRealisateur" tabindex="-1" aria-labelledby="addRealisateurLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addRealisateurLabel">Ajouter un réalisateur</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ModalFormBis/>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
   
 <script setup>
-    import Film from '@/class/Film';
-    import Realisateur from '@/class/Realisateur';
     import MovieCard from '@/components/MovieCard.vue';
     import ModalForm from '@/components/ModalForm.vue';
-
-    const ajouterFilm = () => {
-        const realisateur1 = new Realisateur("Samuel", "test", "française", "20/07/1996");
-        const film = new Film("Le seigneur des Anneaux", "2012", "Anglais", realisateur1, "Dystopique");
-        var films = JSON.parse(localStorage.getItem('films')) || [];
-        films.push(film);
-        localStorage.setItem('films', JSON.stringify(films));
-    }
+    import ModalFormBis from '@/components/ModalFormBis.vue';
     const films = JSON.parse(localStorage.getItem('films')) || [];
+    const realisateurs = JSON.parse(localStorage.getItem('realisateur')) || [];
 </script>
 
 <style>

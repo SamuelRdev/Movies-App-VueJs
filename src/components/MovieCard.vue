@@ -3,7 +3,7 @@
         <div class="card-body">
             <router-link :to="'/movie/' + props.film?._id" class="global-card-link">
                 <div>
-                    <img src="" class="card-img-top" alt="...">
+                    <img :src="props.film?._image" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{ props.film?._titre }}</h5>
                         <p class="card-text">{{ props.film?._anneeDeSortie }}</p>
@@ -36,6 +36,10 @@
 <style>
     .card{
         margin: 30px 0;
+    }
+    .card .card-img-top{
+        max-height: 400px;
+        object-fit: cover;
     }
     .card a.global-card-link{
         color: black;
