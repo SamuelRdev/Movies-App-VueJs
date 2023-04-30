@@ -1,5 +1,7 @@
+let idCounter = 0;
 export default class Realisateur {
     constructor(nom, prenom, nationalite, date_naissance) {
+      this._id = ++idCounter;
       this._nom = nom;
       this._prenom = prenom;
       this._nationalite = nationalite;

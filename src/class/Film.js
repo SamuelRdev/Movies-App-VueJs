@@ -1,5 +1,7 @@
+let idCounter = 0;
 export default class Film {
   constructor(titre, anneeDeSortie, langue, realisateur, genre) {
+    this._id = ++idCounter;
     this._titre = titre;
     this._anneeDeSortie = anneeDeSortie;
     this._langue = langue;
