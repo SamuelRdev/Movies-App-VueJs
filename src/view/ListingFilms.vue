@@ -1,9 +1,9 @@
 <template>
 
-    <div class="row">
+    <div class="row mt-5">
         <div>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addRealisateur" data-bs-whatever="@mdo">Ajouter un réalisateur</button>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMovie" data-bs-whatever="@mdo">Ajouter un film</button>
+            <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#addMovie" data-bs-whatever="@mdo">Ajouter un film</button>
         </div>
     </div>
 
@@ -45,7 +45,7 @@
     import ModalForm from '@/components/ModalForm.vue';
     import ModalFormBis from '@/components/ModalFormBis.vue';
     const films = JSON.parse(localStorage.getItem('films')) || [];
-    const realisateurs = JSON.parse(localStorage.getItem('realisateur')) || [];
+    const realisateurs = JSON.parse(localStorage.getItem('realisateurs')) || [];
 </script>
 
 <style>

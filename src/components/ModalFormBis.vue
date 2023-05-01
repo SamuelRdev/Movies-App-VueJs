@@ -6,15 +6,15 @@
         </div>
         <div class="col-md-3">
             <label for="prenom" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="prenom" v-model.number="_prenom" required>
+            <input type="text" class="form-control" id="prenom" v-model="_prenom" required>
         </div>
         <div class="col-md-3">
             <label for="nationalite" class="form-label">Nationalité</label>
-            <input type="text" class="form-control" id="nationalite" v-model.number="_nationalite" required>
+            <input type="text" class="form-control" id="nationalite" v-model="_nationalite" required>
         </div>
         <div class="col-md-6">
             <label for="genre" class="form-label">Date de naissance</label>
-            <datepicker v-model="_date_naissance" :locale="fr" format="dd/MM/yyyy" required />
+            <VueDatePicker v-model="_date_naissance" />
         </div>
         <div class="modal-footer col-md-12">
             <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -26,34 +26,38 @@
     // import { defineProps } from 'vue';
     import Realisateur from '@/class/Realisateur';
     // import { defineComponent } from 'vue'
-    import Datepicker from 'vue3-datepicker'
-    import 'vue3-datepicker/dist/vue3-datepicker.css'
+    import VueDatePicker from '@vuepic/vue-datepicker';
+    import '@vuepic/vue-datepicker/dist/main.css'
     import router from '@/router';
 
     // const props = defineProps({
     //     editMode: Boolean
     // })
 
+    function formatDate(date) {
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
     const ajouterrealisateur = ({ _nom, _prenom, _nationalite, _date_naissance}) => {
         const realisateur = new Realisateur(
             _nom,
             _prenom,
             _nationalite,
-            _date_naissance
+            formatDate(_date_naissance)
         );
 
         let realisateurs = JSON.parse(localStorage.getItem('realisateurs')) || [];
-        console.log(realisateurs)
-        console.log(realisateur)
         realisateurs.push(realisateur);
         localStorage.setItem('realisateurs', JSON.stringify(realisateurs));
-        const modal = document.querySelector('#addMovie'); // sélectionne l'élément du modal
-        modal.classList.remove('show'); // enlève la classe 'show' qui affiche le modal
-        modal.style.display = 'none'; // masque le modal
+        const modal = document.querySelector('#addMovie');
+        modal.classList.remove('show');
+        modal.style.display = 'none';
         document.body.removeAttribute('style');
-        document.body.classList.remove('modal-open'); // enlève la classe 'modal-open' du body qui empêche le scroll
-        const modalBackdrop = document.querySelector('.modal-backdrop'); // sélectionne l'élément du backdrop du modal
-        modalBackdrop.parentNode.removeChild(modalBackdrop); // retire le backdrop du DOM
+        document.body.classList.remove('modal-open');
+        const modalBackdrop = document.querySelector('.modal-backdrop');
+        modalBackdrop.parentNode.removeChild(modalBackdrop);
         router.push('/')
     };
 </script>

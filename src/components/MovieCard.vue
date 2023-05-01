@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <router-link :to="'/movie/' + props.film?._id" class="global-card-link">
+            <!-- <router-link :to="'/movie/' + props.film?._id" class="global-card-link"> -->
                 <div>
                     <img :src="props.film?._image" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -18,15 +18,49 @@
                             </div>
                         </div>
                         <router-link :to="'/movie/' + props.film?._id" class="btn btn-primary">Voir plus</router-link>
+                        <button v-if="isListing" type="button" class="btn btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#editMovie">Modifier</button>
+                        <button v-if="isListing" type="button" class="btn btn-danger ms-2" @click="deleteFilm(props.film?._id)">Delete</button>
                     </div>
                 </div>
-            </router-link>
+            <!-- </router-link> -->
+        </div>
+    </div>
+    <div class="modal fade" id="editMovie" tabindex="-1" aria-labelledby="editMovieLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editMovieLabel">Modifier un film</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ModalEdit :realisateurs="realisateurs" :movie="props.film?._id"/>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
     import { defineProps } from 'vue';
+    import { useRoute } from "vue-router";
+    import router from '@/router';
+    import ModalEdit from '@/components/ModalEdit.vue';
+
+    const route = useRoute();
+    const realisateurs = JSON.parse(localStorage.getItem('realisateurs')) || [];
+
+    var isListing = false
+
+    if(route.path !== '/'){
+        isListing = true
+    }
+
+    function deleteFilm(id) {
+        const films = JSON.parse(localStorage.getItem("films"));
+        const updatedFilms = films.filter(film => film._id !== id);
+        localStorage.setItem("films", JSON.stringify(updatedFilms));
+        router.push('/')
+    }
 
     const props = defineProps({
         film: Object
@@ -65,10 +99,7 @@
     .watch-more-author{
         display: none;
         position: absolute;
-        /* right: -130px;
-        top: -130px; */
-        right: -50px;
-        top: -100px;
+        top: -180px;
         background-color: #f5f5f5;
         padding: 15px;
         color: black;

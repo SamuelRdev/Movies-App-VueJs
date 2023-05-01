@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <router-link class="nav-link" to="/movie">Tous les films</router-link>
+                  <router-link class="nav-link" to="/movie">Ajouter/modifier/supprimer des films</router-link>
                 </li>
               </ul>
             </div>
